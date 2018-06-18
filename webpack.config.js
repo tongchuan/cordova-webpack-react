@@ -14,7 +14,7 @@ if(!isProd){
 module.exports = {
   entry,
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'www'),
     filename: 'js/index.js',
     publicPath: './'
   },
@@ -68,7 +68,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin([path.resolve(__dirname, "dist")],{
+    new CleanWebpackPlugin([path.resolve(__dirname, "www")],{
       root: path.resolve(__dirname, "/"),
       // verbose: true,
       verbose: false,
@@ -80,9 +80,11 @@ module.exports = {
       chunkFilename: 'css/[name].[id].[chunkhash:8].css'
     }),
     new htmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'src/index.html',
-      inject: 'html'
+      filename: "index.html", //'index.html',
+      template: './src/index.html', //'src/index.html',
+      inject: 'html',
+      title: "教宝宝",
+      favicon: 'path/to/my_favicon.ico'
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
