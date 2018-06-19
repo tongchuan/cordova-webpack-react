@@ -12,6 +12,7 @@ if(!isProd){
   // entry.push('webpack-hot-middleware/client?reload=true','webpack/hot/only-dev-server')
 }
 module.exports = {
+  mode: isProd ? 'production' : 'development',
   entry,
   output: {
     path: path.resolve(__dirname, 'www'),
@@ -74,7 +75,7 @@ module.exports = {
       verbose: false,
       dry: false
     }),
-    new webpack.DefinePlugin({'process.env.NODE_ENV': '"development"'}),
+    new webpack.DefinePlugin({'process.env.NODE_ENV': isProd ? '"production"' : '"development"'}),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[chunkhash:8].css',
       chunkFilename: 'css/[name].[id].[chunkhash:8].css'
@@ -84,8 +85,11 @@ module.exports = {
       template: './src/index.html', //'src/index.html',
       inject: 'html',
       title: "教宝宝",
-      favicon: 'path/to/my_favicon.ico'
+      // favicon: 'favicon.ico'
     }),
+    new CopyWebpackPlugin([{
+      from: "./src/images/favicon.ico",
+      to: "favicon.ico"}]),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     // new webpack.NoErrorsPlugin()
