@@ -26,7 +26,7 @@ app.use(hotMiddleware(compiler,{
   log: false,
   reload: true,
 }));
-app.use(kaoStatic(__dirname + "/src/", {extensions: ['html']}));
+app.use(kaoStatic(__dirname + "/www/", {extensions: ['html']}));
 
 app.listen(8888, () =>{
   console.log('The server is running on port: 8888');
